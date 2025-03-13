@@ -37,4 +37,26 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.style.display = "none";
         }
     });
+
+    const connectTelegramBtn = document.getElementById("connect-telegram");
+    const telegramCredentialsDiv = document.getElementById("telegram-credentials");
+    const saveTelegramCredentialsBtn = document.getElementById("save-telegram-credentials");
+
+    connectTelegramBtn.addEventListener("click", function () {
+        telegramCredentialsDiv.style.display = "block";
+    });
+
+    saveTelegramCredentialsBtn.addEventListener("click", function () {
+        const apiId = document.getElementById("telegram-api-id").value;
+        const apiHash = document.getElementById("telegram-api-hash").value;
+        const chatId = document.getElementById("telegram-chat-id").value;
+
+        // Save the credentials (you can use localStorage or send them to your server)
+        localStorage.setItem("telegramApiId", apiId);
+        localStorage.setItem("telegramApiHash", apiHash);
+        localStorage.setItem("telegramChatId", chatId);
+
+        alert("Telegram credentials saved!");
+        telegramCredentialsDiv.style.display = "none";
+    });
 });

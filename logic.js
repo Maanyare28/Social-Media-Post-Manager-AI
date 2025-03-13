@@ -24,7 +24,17 @@ async function authenticate(platform) {
             // Implement YouTube OAuth authentication
             // ...code to authenticate with YouTube...
             break;
-}
+        case 'telegram':
+            // Implement Telegram OAuth authentication
+            const telegramClient = new TelegramClient({
+                apiId: 'YOUR_API_ID',
+                apiHash: 'YOUR_API_HASH',
+            });
+            await telegramClient.connect();
+            return telegramClient;
+        default:
+            throw new Error('Unsupported platform');
+    }
 }
 
 // Function to schedule a post
@@ -46,10 +56,21 @@ async function schedulePost(platform, content, scheduleTime) {
             // Schedule post for YouTube
             // ...code to schedule post on YouTube...
             break;
+        case 'telegram':
+            // Schedule post for Telegram
+            const telegramClient = await authenticate('telegram');
+            await telegramClient.sendMessage({
+                chat_id: 'YOUR_CHAT_ID',
+                text: content,
+                schedule_date: scheduleTime,
+            });
+            break;
+        default:
+            throw new Error('Unsupported platform');
+    }
 }
 
 module.exports = {
     authenticate,
     schedulePost,
 };
-}
